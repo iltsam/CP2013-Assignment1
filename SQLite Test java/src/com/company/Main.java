@@ -5,14 +5,17 @@ import java.util.Scanner;
 
 
 public class Main extends javax.swing.JFrame {
+    public static JFrame frame = new JFrame("SQL Test");
     public static JLabel label1 = new JLabel();
     public static JLabel label2 = new JLabel();
     public static Scanner kb = new Scanner(System.in);
     public static JTextArea ta = new JTextArea();
+    public static JButton butt = new JButton("Add Employee");
+    public static GroupLayout layout = new GroupLayout(frame.getContentPane());
     public static void main(String[] args) throws ClassNotFoundException  {
         Class.forName("org.sqlite.JDBC");
         Connection c = null;
-        JFrame frame = new JFrame("SQL Test");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -28,10 +31,11 @@ public class Main extends javax.swing.JFrame {
 //            statement.executeUpdate("insert into employees values(1, 'Josh')");
 //            statement.executeUpdate("insert into employees values(2, 'Ron')");
             ResultSet rs = statement.executeQuery("SELECT * FROM employees");
-            frame.getContentPane().add(label1);
-            frame.getContentPane().add(ta);
+//            frame.getContentPane().add(label1);
+//            frame.getContentPane().add(ta);
+//            frame.getContentPane().add(butt);
 
-            frame.setVisible(true);
+
             while(rs.next()) {
                 System.out.println("--------------------");
                 System.out.println("id = " + rs.getString("id"));
@@ -39,33 +43,24 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("--------------------");
                 label1.setText("ID - " + rs.getString("id") + " Name - " + rs.getString("name"));
                 ta.setText(ta.getText() + "ID - " + rs.getString("id") + "\nName - " + rs.getString("name") + "\n\n");
-                frame.pack();
+
             }
             c.close();
         } catch (Exception e){
             System.out.print(e.getMessage());
         }
 
-
-
-
-    }
-
-    private void createGroup() {
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(label1))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(label2)))
-                                .addContainerGap(27, Short.MAX_VALUE))
-        );
+                                                        .addComponent(ta).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(butt)
+                                        ))));
+
+        frame.pack();
+        frame.setVisible(true);
+
     }
 }
