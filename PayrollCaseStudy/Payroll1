@@ -1,0 +1,17 @@
+import _random
+
+
+def getName():
+    firstName = input("Please enter first name")
+    lastName = input("Please enter last name")
+    print("Employee Name: " + firstName + " " + lastName)
+
+
+def genID():
+    randID = random(1, 500)
+    print("Employee Id Number: " + randID)
+
+
+def main():
+    getName()
+    genID()

@@ -1,0 +1,36 @@
+import random
+import tkinter
+class myGui():
+    def _init_(self):
+         self.main_window = tkinter.Tk() # Create a main window widget
+         #create a button
+         self.my_button = tkinter.button(self.main_window, \
+                                    text = "click me!",\
+                                    command=self.dosomething)
+         self.mybuttonpack()
+         tkinter.mainloop()
+    def dosomething(self):
+        #display an ifo dialogue box
+        tkinter.messagebox.showinf('Response','Thank for clicking the button')
+
+def main():
+    getName()
+    genRandID()
+    my_gui = myGui()
+
+
+
+
+def genRandID(void):
+    randID = random.randint(1,500);
+    print("your employee id is: " + str(randID));
+def getName(void):
+
+    firstName = input("Please enter first name ")
+    lastName = input("Please enter last name ")
+
+    print("Employee Name: " + firstName + " " + lastName)
+
+
+
+main()
