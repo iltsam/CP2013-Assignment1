@@ -15,3 +15,5 @@ def genID():
 def main():
     getName()
     genID()
+
+main()
