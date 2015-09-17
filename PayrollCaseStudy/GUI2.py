@@ -34,19 +34,27 @@ class PayrollGui:
         self.DisplayPanelLeft.grid(column = 1, row = 1, columnspan = 5, rowspan = 5)
         self.DisplayPanelRight.grid(column = 7, row = 5, columnspan = 5, rowspan = 5)
 
-        #Payroll Panels
+        #Payroll Add/Edit Panels
         self.SearchButton = tkinter.Button(self.mainWindow, text = "Search", bg = "white")
         self.DataField = tkinter.Entry(self.mainWindow, bg = "white")
 
-        self.message = tkinter.StringVar()
 
+        #Add/Edit Employee
+        self.NewEmployeeButton = tkinter.Button(self.mainWindow, text = "New Employee", bg = "white")
+        self.EditEmployeeButton = tkinter.Button(self.mainWindow, text = "Edit Employee Details", bg = "white")
+
+        self.message = tkinter.StringVar()
         self.mainWindow.mainloop()
+
+
 
     def clearWindow(self):
         self.DisplayPanelRight.grid_forget()
         self.DisplayPanelLeft.grid_forget()
         self.SearchButton.grid_forget()
         self.DataField.grid_forget()
+        self.EditEmployeeButton.grid_forget()
+        self.NewEmployeeButton.grid_forget()
 
     def displayHomeWindow(self):
         self.clearWindow()
@@ -55,15 +63,16 @@ class PayrollGui:
 
     def displayPayrollWindow(self):
         self.clearWindow()
-
         self.SearchButton.grid(column =1, row = 1)
-
         self.DataField.grid(columnspan = 3, column = 2, row=1)
 
     def displayEmployeeDetailsWindow(self):
         self.clearWindow()
+        self.EditEmployeeButton.grid(column = 5, row = 3)
+        self.NewEmployeeButton.grid(column = 3, row = 3)
 
-
+    def displayRunPayrollWIndow(self):
+        self.clearWindow()
 
 run_gui = PayrollGui()
 
