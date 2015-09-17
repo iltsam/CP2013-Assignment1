@@ -1,0 +1,25 @@
+class PayrollGUI:
+
+    import tkinter
+
+    def __init__(self):
+
+        #create the main window
+        self.main_window = tkinter.Tk()
+
+        #Create three frames to group widegts
+        self.topFrame = tkinter.Frame()
+        self.midFrame = tkinter.Frame()
+        self.bottomFrame = tkinter.Frame()
+
+        #Create the widgets for the top frame.
+        self.prompt_label = tkinter.Label(slef.topFrame,\
+        text = 'Enter a distance in kilometers:')
+        self.kilo_entry = tkinter.Entry(self.topFrame, width = 10)
+
+        self.prompt_label.pack(side = 'left')
+        self.kilo_entry.pack(side = 'left')
+
+        self.descr_label = tkinter.Label(self.mid_frame, text = 'Converted to miles:')
+        self.value = tkinter.StringVar()
+

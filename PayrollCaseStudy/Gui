@@ -1,0 +1,27 @@
+from tkinter import *
+
+window = Tk()
+#titleLabel = Label(window, text = "Payroll Case Study")
+#titleLabel.pack()
+
+topFrame = Frame(window)
+topFrame.pack(side = TOP);
+
+bottomFrame = Frame(window)
+bottomFrame.pack(side = BOTTOM)
+
+homeButton = Button(topFrame, text = "Home", bg= "white", fg = "black")
+homeButton.pack(side = LEFT)
+
+AddEditPayroll = Button(topFrame, text = "Add/Edit Payroll",bg = "white", fg = "black")
+AddEditPayroll.pack(side = LEFT)
+
+EmployeeDetailsButton = Button(topFrame, text = "Employee Details", bg = "white", fg = "black")
+EmployeeDetailsButton.pack(side = LEFT)
+
+RunPayrollButton = Button(topFrame, text = "Run Payroll", bg = "white",fg = "black")
+RunPayrollButton.pack(side = LEFT)
+
+
+
+window.mainloop()
