@@ -62,10 +62,6 @@ public class PayrollGUI {
 		frmPayroll.setBounds(100, 100, 800, 600);
 		frmPayroll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		listModel = new DefaultListModel();
-		listModel.addElement("First Employee");
-		listModel.addElement("Second Employee");
-		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
@@ -114,9 +110,10 @@ public class PayrollGUI {
 		
 		JList employeeList = new JList();
 		employeeListPanel.add(employeeList);
-		
-		
 		employeeList.setModel(listModel);
+		listModel = new DefaultListModel();
+		listModel.addElement("First Employee");
+		listModel.addElement("Second Employee");
 		
 		JPanel panel_1 = new JPanel();
 		employeeDetails.add(panel_1, BorderLayout.CENTER);

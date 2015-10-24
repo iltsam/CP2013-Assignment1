@@ -8,8 +8,6 @@ import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.DefaultListModel;
-
 import java.awt.List;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -19,16 +17,11 @@ import javax.swing.border.Border;
 import com.sun.prism.paint.Color;
 
 import javax.swing.JTextPane;
-import java.awt.Button;
-import javax.swing.JTextArea;
-import javax.swing.JList;
-import javax.swing.JButton;
 
 public class PayrollGUI {
 
 	private JFrame frmPayroll;
 	private JTextField txtNewsTextField;
-	private DefaultListModel listModel;
 
 	/**
 	 * Launch the application.
@@ -61,10 +54,6 @@ public class PayrollGUI {
 		frmPayroll.setTitle("Payroll");
 		frmPayroll.setBounds(100, 100, 800, 600);
 		frmPayroll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		listModel = new DefaultListModel();
-		listModel.addElement("First Employee");
-		listModel.addElement("Second Employee");
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
@@ -106,30 +95,6 @@ public class PayrollGUI {
 		
 		JPanel employeeDetails = new JPanel();
 		tabbedPane.addTab("Employee Details", null, employeeDetails, null);
-		employeeDetails.setLayout(new BorderLayout(0, 0));
-		
-		JPanel employeeListPanel = new JPanel();
-		employeeDetails.add(employeeListPanel, BorderLayout.WEST);
-		employeeListPanel.setLayout(new BorderLayout(0, 0));
-		
-		JList employeeList = new JList();
-		employeeListPanel.add(employeeList);
-		
-		
-		employeeList.setModel(listModel);
-		
-		JPanel panel_1 = new JPanel();
-		employeeDetails.add(panel_1, BorderLayout.CENTER);
-		
-		JPanel runPayroll = new JPanel();
-		tabbedPane.addTab("Run Payroll", null, runPayroll, null);
-		runPayroll.setLayout(new BorderLayout(0, 0));
-		
-		Button runPayrollButton = new Button("Run Payroll");
-		runPayroll.add(runPayrollButton, BorderLayout.SOUTH);
-		
-		JTextArea runPayrollTextArea = new JTextArea();
-		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
 	}
 
 }

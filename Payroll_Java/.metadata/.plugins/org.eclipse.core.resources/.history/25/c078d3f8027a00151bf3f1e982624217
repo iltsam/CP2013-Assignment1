@@ -8,8 +8,6 @@ import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.DefaultListModel;
-
 import java.awt.List;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -62,10 +60,6 @@ public class PayrollGUI {
 		frmPayroll.setBounds(100, 100, 800, 600);
 		frmPayroll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		listModel = new DefaultListModel();
-		listModel.addElement("First Employee");
-		listModel.addElement("Second Employee");
-		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
@@ -110,13 +104,12 @@ public class PayrollGUI {
 		
 		JPanel employeeListPanel = new JPanel();
 		employeeDetails.add(employeeListPanel, BorderLayout.WEST);
-		employeeListPanel.setLayout(new BorderLayout(0, 0));
 		
 		JList employeeList = new JList();
 		employeeListPanel.add(employeeList);
 		
-		
-		employeeList.setModel(listModel);
+		JButton btnNewButton = new JButton("New button");
+		employeeListPanel.add(btnNewButton);
 		
 		JPanel panel_1 = new JPanel();
 		employeeDetails.add(panel_1, BorderLayout.CENTER);
