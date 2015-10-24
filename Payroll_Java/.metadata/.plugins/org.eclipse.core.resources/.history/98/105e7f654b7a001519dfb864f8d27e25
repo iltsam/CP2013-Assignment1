@@ -1,0 +1,16 @@
+
+
+
+public class Payroll {
+	private PayrollGUI gui = new PayrollGUI();
+	public void main(String[] args) {
+		gui.main();
+		
+		test();
+	}
+	
+	private void test() {
+		System.out.println(gui.getSalary());
+	}
+
+}

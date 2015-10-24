@@ -40,7 +40,7 @@ public class PayrollGUI {
 	private JTextField hoursWorkedTextBox;
 	private JTextField hourlyRateTextBox;
 	private JTextField idTextBox;
-	public JComboBox salaryComboBox;
+	private JComboBox salaryComboBox;
 	private JComboBox genderComboBox;
 
 	/**
@@ -300,6 +300,8 @@ public class PayrollGUI {
 		
 		JTextArea runPayrollTextArea = new JTextArea();
 		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
+		
+		System.out.println(salaryComboBox.getModel().getSelectedItem().toString());
 	}
 	
 	public String getID(){
@@ -346,6 +348,7 @@ public class PayrollGUI {
 	
 	public String getSalary() {
 		String salary;
+		
 		salary = salaryComboBox.getModel().getSelectedItem().toString();
 		System.out.println(salaryComboBox.getModel().getSelectedItem().toString());
 		return salary;

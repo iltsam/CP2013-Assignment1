@@ -9,8 +9,8 @@ public class Payroll {
 		test();
 	}
 	
-	private static void test() {
-		System.out.println(gui.getFirstName());
+	private void test() {
+		System.out.println(gui.getSalary());
 	}
 
 }

@@ -10,7 +10,7 @@ public class Payroll {
 	}
 	
 	private static void test() {
-		System.out.println(gui.getFirstName());
+		System.out.println(gui.getSalary());
 	}
 
 }

@@ -40,7 +40,7 @@ public class PayrollGUI {
 	private JTextField hoursWorkedTextBox;
 	private JTextField hourlyRateTextBox;
 	private JTextField idTextBox;
-	public JComboBox salaryComboBox;
+	private JComboBox salaryComboBox;
 	private JComboBox genderComboBox;
 
 	/**
@@ -57,7 +57,6 @@ public class PayrollGUI {
 				}
 			}
 		});
-		
 	}
 
 	/**
@@ -302,52 +301,51 @@ public class PayrollGUI {
 		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
 	}
 	
-	public String getID(){
+	private String getID(){
 		String id;
 		id = idTextBox.getText();
 		return id;
 	}
 	
-	public String getFirstName(){
+	private String getFirstName(){
 		String firstName;
 		firstName = employeeFirstNameTextBox.getText();
 		return firstName;
 	}
 	
-	public String getLastName() {
+	private String getLastName() {
 		String lastName;
 		lastName = employeeLastNameTextBox.getText();
 		return lastName;
 	}
 	
-	public String getGender() {
+	private String getGender() {
 		String gender;
-		gender = genderComboBox.getModel().getSelectedItem().toString();
+		gender = genderComboBox.getModel().getSelectedItem();
 		return gender;
 	}
 	
-	public String getDOB(){
+	private String getDOB(){
 		String dob;
 		dob = dobTextBox.getText();
 		return dob;
 	}
 	
-	public String getHoursWorked(){
+	private String getHoursWorked(){
 		String hoursWorked;
 		hoursWorked = hoursWorkedTextBox.getText();
 		return hoursWorked;
 	}
 	
-	public String getHourlyRate() {
+	private String getHourlyRate() {
 		String hourlyRate;
 		hourlyRate = hourlyRateTextBox.getText();
 		return hourlyRate;
 	}
 	
-	public String getSalary() {
+	private String getSalary() {
 		String salary;
-		salary = salaryComboBox.getModel().getSelectedItem().toString();
-		System.out.println(salaryComboBox.getModel().getSelectedItem().toString());
+		salary = salaryComboBox.getModel().getSelectedItem();
 		return salary;
 	}
 	
