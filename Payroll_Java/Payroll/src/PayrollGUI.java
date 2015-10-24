@@ -44,7 +44,7 @@ public class PayrollGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -233,15 +233,15 @@ public class PayrollGUI {
 		employeeDetailPanel.add(employeeLastNameTextBox, gbc_employeeLastNameTextBox);
 		employeeLastNameTextBox.setColumns(10);
 		
-		JComboBox gender = new JComboBox();
-		gender.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
-		GridBagConstraints gbc_gender = new GridBagConstraints();
-		gbc_gender.weightx = 0.1;
-		gbc_gender.insets = new Insets(0, 0, 0, 5);
-		gbc_gender.fill = GridBagConstraints.HORIZONTAL;
-		gbc_gender.gridx = 3;
-		gbc_gender.gridy = 2;
-		employeeDetailPanel.add(gender, gbc_gender);
+		JComboBox genderComboBox = new JComboBox();
+		genderComboBox.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
+		GridBagConstraints gbc_genderComboBox = new GridBagConstraints();
+		gbc_genderComboBox.weightx = 0.1;
+		gbc_genderComboBox.insets = new Insets(0, 0, 0, 5);
+		gbc_genderComboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_genderComboBox.gridx = 3;
+		gbc_genderComboBox.gridy = 2;
+		employeeDetailPanel.add(genderComboBox, gbc_genderComboBox);
 		
 		dobTextBox = new JTextField();
 		GridBagConstraints gbc_dobTextBox = new GridBagConstraints();
@@ -273,16 +273,16 @@ public class PayrollGUI {
 		employeeDetailPanel.add(hourlyRateTextBox, gbc_hourlyRateTextBox);
 		hourlyRateTextBox.setColumns(10);
 		
-		JComboBox salary = new JComboBox();
-		salary.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
-		GridBagConstraints gbc_salary = new GridBagConstraints();
-		gbc_salary.weightx = 0.1;
-		gbc_salary.fill = GridBagConstraints.HORIZONTAL;
-		gbc_salary.gridx = 7;
-		gbc_salary.gridy = 2;
-		employeeDetailPanel.add(salary, gbc_salary);
+		JComboBox salaryComboBox = new JComboBox();
+		salaryComboBox.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
+		GridBagConstraints gbc_salaryComboBox = new GridBagConstraints();
+		gbc_salaryComboBox.weightx = 0.1;
+		gbc_salaryComboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_salaryComboBox.gridx = 7;
+		gbc_salaryComboBox.gridy = 2;
+		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
 		
-		if(salary.getModel().getSelectedItem() == "Yes") {
+		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
 			hoursWorkedTextBox.setEditable(false);
 			hourlyRateTextBox.setEditable(false);
 			
@@ -298,5 +298,54 @@ public class PayrollGUI {
 		JTextArea runPayrollTextArea = new JTextArea();
 		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
 	}
+	
+	private String getID(){
+		String id;
+		id = idTextBox.getText();
+		return id;
+	}
+	
+	private String getFirstName(){
+		String firstName;
+		firstName = employeeFirstNameTextBox.getText();
+		return firstName;
+	}
+	
+	private String getLastName() {
+		String lastName;
+		lastName = employeeLastNameTextBox.getText();
+		return lastName;
+	}
+	
+	private String getGender() {
+		String gender;
+		gender = genderComboBox.getText();
+		return gender;
+	}
+	
+	private String getDOB(){
+		String dob;
+		dob = dobTextBox.getText();
+		return dob;
+	}
+	
+	private String getHoursWorked(){
+		String hoursWorked;
+		hoursWorked = hoursWorkedTextBox.getText();
+		return hoursWorked;
+	}
+	
+	private String getHourlyRate() {
+		String hourlyRate;
+		hourlyRate = hourlyRateTextBox.getText();
+		return hourlyRate;
+	}
+	
+	private String getSalary() {
+		String salary;
+		salary = salaryComboBox.getModel().getSelectedItem();
+		return salary;
+	}
+	
 
 }
