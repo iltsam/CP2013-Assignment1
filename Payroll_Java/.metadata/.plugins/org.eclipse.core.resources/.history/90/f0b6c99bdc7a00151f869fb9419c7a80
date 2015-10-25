@@ -1,0 +1,34 @@
+import java.sql.*;
+
+
+public class Payroll {
+	private Connection connect = null;
+	private Statement statement = null;
+	private PreparedStatement preparedStatement = null;
+	private ResultSet resultSet = null;
+	private static PayrollGUI gui = new PayrollGUI();
+	
+	public static void main(String[] args) throws Exception{
+		gui.main();
+		test();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close();
+		}
+	}
+	
+	private static void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void test() {
+		gui.setGender("Female");
+	}
+	
+	
+
+}
