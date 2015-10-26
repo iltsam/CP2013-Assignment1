@@ -6,11 +6,15 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
+import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 
 import java.awt.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -28,25 +32,27 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class PayrollGUI {
 
 	private JFrame frmPayroll;
 	private JTextField txtNewsTextField;
-	private DefaultListModel employeeListModel;
 	private JTextField employeeFirstNameTextBox;
 	private JTextField employeeLastNameTextBox;
 	private JTextField dobTextBox;
 	private JTextField hoursWorkedTextBox;
 	private JTextField hourlyRateTextBox;
 	private JTextField idTextBox;
-	private JComboBox genderComboBox;
-	private JComboBox salaryComboBox;
+	private JComboBox<String> genderComboBox;
+	private JComboBox<String> salaryComboBox;
+	private JList<String> employeeList;
+	private static MyListModel employeeListModel = new MyListModel(new ArrayList<>());
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main() {
+	public void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -76,51 +82,12 @@ public class PayrollGUI {
 		frmPayroll.setBounds(100, 100, 800, 600);
 		frmPayroll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		employeeListModel = new DefaultListModel();
+		
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel overview = new JPanel();
-		tabbedPane.addTab("Overview", null, overview, null);
-		overview.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		Box verticalBox = Box.createVerticalBox();
-		overview.add(verticalBox);
-		
-		JPanel payrollLastRanPanel = new JPanel();
-		verticalBox.add(payrollLastRanPanel);
-		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
-		payrollLastRanPanel.setBorder(border);
-		
-		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
-		payrollLastRanPanel.add(payrollLabel);
-		
-		JPanel newsPanel = new JPanel();
-		verticalBox.add(newsPanel);
-		newsPanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNews = new JLabel("News");
-		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(lblNews, BorderLayout.NORTH);
-		
-		txtNewsTextField = new JTextField();
-		lblNews.setLabelFor(txtNewsTextField);
-		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
-		txtNewsTextField.setEditable(false);
-		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
-		txtNewsTextField.setColumns(10);
-		
-		List list = new List();
-		overview.add(list);
-		
-		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
-			hoursWorkedTextBox.setEditable(false);
-			hourlyRateTextBox.setEditable(false);
-			
-		}
 		
 		JPanel employeeDetails = new JPanel();
 		tabbedPane.addTab("Employee Details", null, employeeDetails, null);
@@ -130,11 +97,9 @@ public class PayrollGUI {
 		employeeDetails.add(employeeListPanel, BorderLayout.WEST);
 		employeeListPanel.setLayout(new BorderLayout(0, 0));
 		
-		JList employeeList = new JList();
+		employeeList = new JList();
+		employeeList.setFont(new Font("Lucida Console", Font.PLAIN, 17));
 		employeeListPanel.add(employeeList);
-		
-		
-		employeeList.setModel(employeeListModel);
 		
 		JButton loadDetails = new JButton("Load Details");
 		loadDetails.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -144,9 +109,9 @@ public class PayrollGUI {
 		employeeDetails.add(employeeDetailPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_employeeDetailPanel = new GridBagLayout();
 		gbl_employeeDetailPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_employeeDetailPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_employeeDetailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_employeeDetailPanel.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_employeeDetailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_employeeDetailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		employeeDetailPanel.setLayout(gbl_employeeDetailPanel);
 		
 		JLabel lblId = new JLabel("ID");
@@ -211,7 +176,7 @@ public class PayrollGUI {
 		idTextBox.setText("ID");
 		idTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_idTextBox = new GridBagConstraints();
-		gbc_idTextBox.insets = new Insets(0, 0, 0, 5);
+		gbc_idTextBox.insets = new Insets(0, 0, 5, 5);
 		gbc_idTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_idTextBox.gridx = 0;
 		gbc_idTextBox.gridy = 2;
@@ -223,7 +188,7 @@ public class PayrollGUI {
 		employeeFirstNameTextBox.setText("Employee Name");
 		GridBagConstraints gbc_employeeFirstNameTextBox = new GridBagConstraints();
 		gbc_employeeFirstNameTextBox.weightx = 10.0;
-		gbc_employeeFirstNameTextBox.insets = new Insets(0, 0, 0, 5);
+		gbc_employeeFirstNameTextBox.insets = new Insets(0, 0, 5, 5);
 		gbc_employeeFirstNameTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_employeeFirstNameTextBox.gridx = 1;
 		gbc_employeeFirstNameTextBox.gridy = 2;
@@ -235,7 +200,7 @@ public class PayrollGUI {
 		employeeLastNameTextBox.setText("Employee Last Name");
 		GridBagConstraints gbc_employeeLastNameTextBox = new GridBagConstraints();
 		gbc_employeeLastNameTextBox.weightx = 10.0;
-		gbc_employeeLastNameTextBox.insets = new Insets(0, 0, 0, 5);
+		gbc_employeeLastNameTextBox.insets = new Insets(0, 0, 5, 5);
 		gbc_employeeLastNameTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_employeeLastNameTextBox.gridx = 2;
 		gbc_employeeLastNameTextBox.gridy = 2;
@@ -246,7 +211,7 @@ public class PayrollGUI {
 		genderComboBox.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
 		GridBagConstraints gbc_genderComboBox = new GridBagConstraints();
 		gbc_genderComboBox.weightx = 0.1;
-		gbc_genderComboBox.insets = new Insets(0, 0, 0, 5);
+		gbc_genderComboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_genderComboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_genderComboBox.gridx = 3;
 		gbc_genderComboBox.gridy = 2;
@@ -255,7 +220,7 @@ public class PayrollGUI {
 		dobTextBox = new JTextField();
 		GridBagConstraints gbc_dobTextBox = new GridBagConstraints();
 		gbc_dobTextBox.weightx = 5.0;
-		gbc_dobTextBox.insets = new Insets(0, 0, 0, 5);
+		gbc_dobTextBox.insets = new Insets(0, 0, 5, 5);
 		gbc_dobTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_dobTextBox.gridx = 4;
 		gbc_dobTextBox.gridy = 2;
@@ -265,7 +230,7 @@ public class PayrollGUI {
 		hoursWorkedTextBox = new JTextField();
 		GridBagConstraints gbc_hoursWorkedTextBox = new GridBagConstraints();
 		gbc_hoursWorkedTextBox.weightx = 0.5;
-		gbc_hoursWorkedTextBox.insets = new Insets(0, 0, 0, 5);
+		gbc_hoursWorkedTextBox.insets = new Insets(0, 0, 5, 5);
 		gbc_hoursWorkedTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_hoursWorkedTextBox.gridx = 5;
 		gbc_hoursWorkedTextBox.gridy = 2;
@@ -275,7 +240,7 @@ public class PayrollGUI {
 		hourlyRateTextBox = new JTextField();
 		GridBagConstraints gbc_hourlyRateTextBox = new GridBagConstraints();
 		gbc_hourlyRateTextBox.weightx = 0.1;
-		gbc_hourlyRateTextBox.insets = new Insets(0, 0, 0, 5);
+		gbc_hourlyRateTextBox.insets = new Insets(0, 0, 5, 5);
 		gbc_hourlyRateTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_hourlyRateTextBox.gridx = 6;
 		gbc_hourlyRateTextBox.gridy = 2;
@@ -285,11 +250,47 @@ public class PayrollGUI {
 		salaryComboBox = new JComboBox();
 		salaryComboBox.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
 		GridBagConstraints gbc_salaryComboBox = new GridBagConstraints();
+		gbc_salaryComboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_salaryComboBox.weightx = 0.1;
 		gbc_salaryComboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_salaryComboBox.gridx = 7;
 		gbc_salaryComboBox.gridy = 2;
 		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
+		
+		JPanel overview = new JPanel();
+		tabbedPane.addTab("Overview", null, overview, null);
+		overview.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		Box verticalBox = Box.createVerticalBox();
+		overview.add(verticalBox);
+		
+		JPanel payrollLastRanPanel = new JPanel();
+		verticalBox.add(payrollLastRanPanel);
+		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
+		payrollLastRanPanel.setBorder(border);
+		
+		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
+		payrollLastRanPanel.add(payrollLabel);
+		
+		JPanel newsPanel = new JPanel();
+		verticalBox.add(newsPanel);
+		newsPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNews = new JLabel("News");
+		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(lblNews, BorderLayout.NORTH);
+		
+		txtNewsTextField = new JTextField();
+		lblNews.setLabelFor(txtNewsTextField);
+		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
+		txtNewsTextField.setEditable(false);
+		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
+		txtNewsTextField.setColumns(10);
+		
+		List list = new List();
+		overview.add(list);
 		
 		JPanel runPayroll = new JPanel();
 		tabbedPane.addTab("Run Payroll", null, runPayroll, null);
@@ -300,6 +301,12 @@ public class PayrollGUI {
 		
 		JTextArea runPayrollTextArea = new JTextArea();
 		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
+		employeeList.setModel(employeeListModel);
+		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
+			hoursWorkedTextBox.setEditable(false);
+			hourlyRateTextBox.setEditable(false);
+			
+		}
 	}
 	
 	public String getID(){
@@ -390,5 +397,17 @@ public class PayrollGUI {
 		}
 	}
 	
+	public void addEmployeeToList(String employeeName) {
+		employeeListModel.add(employeeListModel.getSize(), employeeName);
+		employeeListModel.setSelectedItem(0);
+	}
+	
+	public String getSelectedListItem() {
+		return employeeListModel.getSelectedItem().toString();
+	}
+	
+	public void setSelectedListItem(int index) {
+		employeeListModel.setSelectedItem(index);
+	}
 
 }

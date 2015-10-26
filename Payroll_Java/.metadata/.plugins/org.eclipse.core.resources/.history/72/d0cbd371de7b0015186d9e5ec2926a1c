@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+
+import javax.swing.AbstractListModel;
+
+class MyListModel extends AbstractListModel {
+  private Object selectedItem;
+
+  private ArrayList anArrayList;
+
+  public MyListModel(ArrayList arrayList) {
+    anArrayList = arrayList;
+  }
+
+  public Object getSelectedItem() {
+    return selectedItem;
+  }
+
+  public void setSelectedItem(Object newValue) {
+    selectedItem = newValue;
+  }
+
+  public int getSize() {
+    return anArrayList.size();
+  }
+  
+  public void add(int index, String name) {
+      anArrayList.add(index, name);
+      fireIntervalAdded(this, index, index);
+    }
+
+  public Object getElementAt(int i) {
+    return anArrayList.get(i);
+  }
+
+}
