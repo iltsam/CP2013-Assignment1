@@ -37,11 +37,6 @@ public class DatabaseController {
 
 	private void close() {
 		// TODO Auto-generated method stub
-		try {
-			connect.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 }

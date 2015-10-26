@@ -81,6 +81,47 @@ public class PayrollGUI {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
+		JPanel overview = new JPanel();
+		tabbedPane.addTab("Overview", null, overview, null);
+		overview.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		Box verticalBox = Box.createVerticalBox();
+		overview.add(verticalBox);
+		
+		JPanel payrollLastRanPanel = new JPanel();
+		verticalBox.add(payrollLastRanPanel);
+		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
+		payrollLastRanPanel.setBorder(border);
+		
+		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
+		payrollLastRanPanel.add(payrollLabel);
+		
+		JPanel newsPanel = new JPanel();
+		verticalBox.add(newsPanel);
+		newsPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNews = new JLabel("News");
+		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(lblNews, BorderLayout.NORTH);
+		
+		txtNewsTextField = new JTextField();
+		lblNews.setLabelFor(txtNewsTextField);
+		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
+		txtNewsTextField.setEditable(false);
+		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
+		txtNewsTextField.setColumns(10);
+		
+		List list = new List();
+		overview.add(list);
+		
+		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
+			hoursWorkedTextBox.setEditable(false);
+			hourlyRateTextBox.setEditable(false);
+			
+		}
+		
 		JPanel employeeDetails = new JPanel();
 		tabbedPane.addTab("Employee Details", null, employeeDetails, null);
 		employeeDetails.setLayout(new BorderLayout(0, 0));
@@ -249,47 +290,6 @@ public class PayrollGUI {
 		gbc_salaryComboBox.gridx = 7;
 		gbc_salaryComboBox.gridy = 2;
 		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
-		
-		JPanel overview = new JPanel();
-		tabbedPane.addTab("Overview", null, overview, null);
-		overview.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		Box verticalBox = Box.createVerticalBox();
-		overview.add(verticalBox);
-		
-		JPanel payrollLastRanPanel = new JPanel();
-		verticalBox.add(payrollLastRanPanel);
-		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
-		payrollLastRanPanel.setBorder(border);
-		
-		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
-		payrollLastRanPanel.add(payrollLabel);
-		
-		JPanel newsPanel = new JPanel();
-		verticalBox.add(newsPanel);
-		newsPanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNews = new JLabel("News");
-		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(lblNews, BorderLayout.NORTH);
-		
-		txtNewsTextField = new JTextField();
-		lblNews.setLabelFor(txtNewsTextField);
-		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
-		txtNewsTextField.setEditable(false);
-		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
-		txtNewsTextField.setColumns(10);
-		
-		List list = new List();
-		overview.add(list);
-		
-		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
-			hoursWorkedTextBox.setEditable(false);
-			hourlyRateTextBox.setEditable(false);
-			
-		}
 		
 		JPanel runPayroll = new JPanel();
 		tabbedPane.addTab("Run Payroll", null, runPayroll, null);

@@ -40,8 +40,8 @@ public class PayrollGUI {
 	private JTextField hoursWorkedTextBox;
 	private JTextField hourlyRateTextBox;
 	private JTextField idTextBox;
-	public JComboBox salaryComboBox;
 	private JComboBox genderComboBox;
+	private JComboBox salaryComboBox;
 
 	/**
 	 * Launch the application.
@@ -80,41 +80,6 @@ public class PayrollGUI {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		
-		JPanel overview = new JPanel();
-		tabbedPane.addTab("Overview", null, overview, null);
-		overview.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		Box verticalBox = Box.createVerticalBox();
-		overview.add(verticalBox);
-		
-		JPanel payrollLastRanPanel = new JPanel();
-		verticalBox.add(payrollLastRanPanel);
-		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
-		payrollLastRanPanel.setBorder(border);
-		
-		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
-		payrollLastRanPanel.add(payrollLabel);
-		
-		JPanel newsPanel = new JPanel();
-		verticalBox.add(newsPanel);
-		newsPanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNews = new JLabel("News");
-		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(lblNews, BorderLayout.NORTH);
-		
-		txtNewsTextField = new JTextField();
-		lblNews.setLabelFor(txtNewsTextField);
-		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
-		txtNewsTextField.setEditable(false);
-		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
-		txtNewsTextField.setColumns(10);
-		
-		List list = new List();
-		overview.add(list);
 		
 		JPanel employeeDetails = new JPanel();
 		tabbedPane.addTab("Employee Details", null, employeeDetails, null);
@@ -236,7 +201,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(employeeLastNameTextBox, gbc_employeeLastNameTextBox);
 		employeeLastNameTextBox.setColumns(10);
 		
-		JComboBox genderComboBox = new JComboBox();
+		genderComboBox = new JComboBox();
 		genderComboBox.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
 		GridBagConstraints gbc_genderComboBox = new GridBagConstraints();
 		gbc_genderComboBox.weightx = 0.1;
@@ -276,7 +241,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(hourlyRateTextBox, gbc_hourlyRateTextBox);
 		hourlyRateTextBox.setColumns(10);
 		
-		JComboBox salaryComboBox = new JComboBox();
+		salaryComboBox = new JComboBox();
 		salaryComboBox.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
 		GridBagConstraints gbc_salaryComboBox = new GridBagConstraints();
 		gbc_salaryComboBox.weightx = 0.1;
@@ -284,6 +249,41 @@ public class PayrollGUI {
 		gbc_salaryComboBox.gridx = 7;
 		gbc_salaryComboBox.gridy = 2;
 		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
+		
+		JPanel overview = new JPanel();
+		tabbedPane.addTab("Overview", null, overview, null);
+		overview.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		Box verticalBox = Box.createVerticalBox();
+		overview.add(verticalBox);
+		
+		JPanel payrollLastRanPanel = new JPanel();
+		verticalBox.add(payrollLastRanPanel);
+		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
+		payrollLastRanPanel.setBorder(border);
+		
+		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
+		payrollLastRanPanel.add(payrollLabel);
+		
+		JPanel newsPanel = new JPanel();
+		verticalBox.add(newsPanel);
+		newsPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNews = new JLabel("News");
+		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(lblNews, BorderLayout.NORTH);
+		
+		txtNewsTextField = new JTextField();
+		lblNews.setLabelFor(txtNewsTextField);
+		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
+		txtNewsTextField.setEditable(false);
+		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
+		txtNewsTextField.setColumns(10);
+		
+		List list = new List();
+		overview.add(list);
 		
 		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
 			hoursWorkedTextBox.setEditable(false);
@@ -308,10 +308,18 @@ public class PayrollGUI {
 		return id;
 	}
 	
+	public void setID(String newID){
+		idTextBox.setText(newID);
+	}
+	
 	public String getFirstName(){
 		String firstName;
 		firstName = employeeFirstNameTextBox.getText();
 		return firstName;
+	}
+	
+	public void setFirstName(String newFirstName) {
+		employeeFirstNameTextBox.setText(newFirstName);
 	}
 	
 	public String getLastName() {
@@ -320,10 +328,22 @@ public class PayrollGUI {
 		return lastName;
 	}
 	
+	public void setLastName(String newLastName) {
+		employeeLastNameTextBox.setText(newLastName);
+	}
+	
 	public String getGender() {
 		String gender;
 		gender = genderComboBox.getModel().getSelectedItem().toString();
 		return gender;
+	}
+	
+	public void setGender(String newGender) {
+		if (newGender == "male") { 
+			
+		} else if (newGender == "female") {
+			
+		}
 	}
 	
 	public String getDOB(){
@@ -332,10 +352,18 @@ public class PayrollGUI {
 		return dob;
 	}
 	
+	public void setDOB(String newDOB){
+		dobTextBox.setText(newDOB);
+	}
+	
 	public String getHoursWorked(){
 		String hoursWorked;
 		hoursWorked = hoursWorkedTextBox.getText();
 		return hoursWorked;
+	}
+	
+	public void setHoursWorked(String newHoursWorked) {
+		hoursWorkedTextBox.setText(newHoursWorked);
 	}
 	
 	public String getHourlyRate() {
@@ -344,11 +372,22 @@ public class PayrollGUI {
 		return hourlyRate;
 	}
 	
+	public void setHourlyRate(String newHourlyRate) {
+		hourlyRateTextBox.setText(newHourlyRate);
+	}
+	
 	public String getSalary() {
 		String salary;
 		salary = salaryComboBox.getModel().getSelectedItem().toString();
-		System.out.println(salaryComboBox.getModel().getSelectedItem().toString());
 		return salary;
+	}
+	
+	public void setSalary(Boolean newSalary) {
+		if (newSalary == true) {
+			
+		}else if (newSalary == false) {
+			
+		}
 	}
 	
 

@@ -15,7 +15,7 @@ public class Payroll {
 	}
 
 	private static void test() {
-		
+		gui.setGender("Female");
 	}
 	
 	
