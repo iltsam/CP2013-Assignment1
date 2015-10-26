@@ -13,6 +13,7 @@ import javax.swing.DefaultListModel;
 
 import java.awt.List;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -41,8 +42,8 @@ public class PayrollGUI {
 	private JTextField employeeFirstNameTextBox;
 	private JTextField employeeLastNameTextBox;
 	private JTextField dobTextBox;
-	private JTextField hoursWorkedTextBox;
-	private JTextField hourlyRateTextBox;
+	private static JTextField hoursWorkedTextBox = new JTextField();
+	private static JTextField hourlyRateTextBox = new JTextField(); // Need to change vars to this format so they can be edited
 	private JTextField idTextBox;
 	private JComboBox<String> genderComboBox;
 	private JComboBox<String> salaryComboBox;
@@ -82,12 +83,43 @@ public class PayrollGUI {
 		frmPayroll.setBounds(100, 100, 800, 600);
 		frmPayroll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
-		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPayroll.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
+		JPanel overview = new JPanel();
+		tabbedPane.addTab("Overview", null, overview, null);
+		overview.setLayout(new GridLayout(1, 0, 0, 0));
 		
+		Box verticalBox = Box.createVerticalBox();
+		overview.add(verticalBox);
+		
+		JPanel payrollLastRanPanel = new JPanel();
+		verticalBox.add(payrollLastRanPanel);
+		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
+		payrollLastRanPanel.setBorder(border);
+		
+		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
+		payrollLastRanPanel.add(payrollLabel);
+		
+		JPanel newsPanel = new JPanel();
+		verticalBox.add(newsPanel);
+		newsPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNews = new JLabel("News");
+		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(lblNews, BorderLayout.NORTH);
+		
+		txtNewsTextField = new JTextField();
+		lblNews.setLabelFor(txtNewsTextField);
+		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
+		txtNewsTextField.setEditable(false);
+		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
+		txtNewsTextField.setColumns(10);
+		
+		List list = new List();
+		overview.add(list);
 		
 		JPanel employeeDetails = new JPanel();
 		tabbedPane.addTab("Employee Details", null, employeeDetails, null);
@@ -98,7 +130,7 @@ public class PayrollGUI {
 		employeeListPanel.setLayout(new BorderLayout(0, 0));
 		
 		employeeList = new JList();
-		employeeList.setFont(new Font("Lucida Console", Font.PLAIN, 17));
+		employeeList.setFont(new Font("Lucida Console", Font.PLAIN, 11));
 		employeeListPanel.add(employeeList);
 		
 		JButton loadDetails = new JButton("Load Details");
@@ -110,7 +142,7 @@ public class PayrollGUI {
 		GridBagLayout gbl_employeeDetailPanel = new GridBagLayout();
 		gbl_employeeDetailPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_employeeDetailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_employeeDetailPanel.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_employeeDetailPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_employeeDetailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		employeeDetailPanel.setLayout(gbl_employeeDetailPanel);
 		
@@ -173,7 +205,6 @@ public class PayrollGUI {
 		employeeDetailPanel.add(lblSalary, gbc_lblSalary);
 		
 		idTextBox = new JTextField();
-		idTextBox.setText("ID");
 		idTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_idTextBox = new GridBagConstraints();
 		gbc_idTextBox.insets = new Insets(0, 0, 5, 5);
@@ -185,7 +216,6 @@ public class PayrollGUI {
 		
 		employeeFirstNameTextBox = new JTextField();
 		employeeFirstNameTextBox.setHorizontalAlignment(SwingConstants.CENTER);
-		employeeFirstNameTextBox.setText("Employee Name");
 		GridBagConstraints gbc_employeeFirstNameTextBox = new GridBagConstraints();
 		gbc_employeeFirstNameTextBox.weightx = 10.0;
 		gbc_employeeFirstNameTextBox.insets = new Insets(0, 0, 5, 5);
@@ -227,7 +257,6 @@ public class PayrollGUI {
 		employeeDetailPanel.add(dobTextBox, gbc_dobTextBox);
 		dobTextBox.setColumns(10);
 		
-		hoursWorkedTextBox = new JTextField();
 		GridBagConstraints gbc_hoursWorkedTextBox = new GridBagConstraints();
 		gbc_hoursWorkedTextBox.weightx = 0.5;
 		gbc_hoursWorkedTextBox.insets = new Insets(0, 0, 5, 5);
@@ -237,7 +266,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(hoursWorkedTextBox, gbc_hoursWorkedTextBox);
 		hoursWorkedTextBox.setColumns(10);
 		
-		hourlyRateTextBox = new JTextField();
+		hourlyRateTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_hourlyRateTextBox = new GridBagConstraints();
 		gbc_hourlyRateTextBox.weightx = 0.1;
 		gbc_hourlyRateTextBox.insets = new Insets(0, 0, 5, 5);
@@ -256,41 +285,7 @@ public class PayrollGUI {
 		gbc_salaryComboBox.gridx = 7;
 		gbc_salaryComboBox.gridy = 2;
 		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
-		
-		JPanel overview = new JPanel();
-		tabbedPane.addTab("Overview", null, overview, null);
-		overview.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		Box verticalBox = Box.createVerticalBox();
-		overview.add(verticalBox);
-		
-		JPanel payrollLastRanPanel = new JPanel();
-		verticalBox.add(payrollLastRanPanel);
-		payrollLastRanPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK);
-		payrollLastRanPanel.setBorder(border);
-		
-		JLabel payrollLabel = new JLabel("Payroll Last Ran: Never");
-		payrollLastRanPanel.add(payrollLabel);
-		
-		JPanel newsPanel = new JPanel();
-		verticalBox.add(newsPanel);
-		newsPanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNews = new JLabel("News");
-		lblNews.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(lblNews, BorderLayout.NORTH);
-		
-		txtNewsTextField = new JTextField();
-		lblNews.setLabelFor(txtNewsTextField);
-		txtNewsTextField.setText("29/10/2015 - New Payroll system implemented");
-		txtNewsTextField.setEditable(false);
-		txtNewsTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
-		txtNewsTextField.setColumns(10);
-		
-		List list = new List();
-		overview.add(list);
+		employeeList.setModel(employeeListModel);
 		
 		JPanel runPayroll = new JPanel();
 		tabbedPane.addTab("Run Payroll", null, runPayroll, null);
@@ -301,12 +296,11 @@ public class PayrollGUI {
 		
 		JTextArea runPayrollTextArea = new JTextArea();
 		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
-		employeeList.setModel(employeeListModel);
-		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
-			hoursWorkedTextBox.setEditable(false);
-			hourlyRateTextBox.setEditable(false);
-			
-		}
+//		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
+//			hoursWorkedTextBox.setEditable(false);
+//			hourlyRateTextBox.setEditable(false);
+//			
+//		}
 	}
 	
 	public String getID(){
@@ -346,11 +340,7 @@ public class PayrollGUI {
 	}
 	
 	public void setGender(String newGender) {
-		if (newGender == "male") { 
-			
-		} else if (newGender == "female") {
-			
-		}
+		genderComboBox.setSelectedIndex(1);
 	}
 	
 	public String getDOB(){
@@ -373,10 +363,8 @@ public class PayrollGUI {
 		hoursWorkedTextBox.setText(newHoursWorked);
 	}
 	
-	public String getHourlyRate() {
-		String hourlyRate;
-		hourlyRate = hourlyRateTextBox.getText();
-		return hourlyRate;
+	public JTextField getHourlyRate() {
+		return hourlyRateTextBox;
 	}
 	
 	public void setHourlyRate(String newHourlyRate) {
@@ -398,12 +386,14 @@ public class PayrollGUI {
 	}
 	
 	public void addEmployeeToList(String employeeName) {
+		setHourlyRate("123");
 		employeeListModel.add(employeeListModel.getSize(), employeeName);
-		employeeListModel.setSelectedItem(0);
+		employeeList.setSelectedIndex(0);
 	}
 	
 	public String getSelectedListItem() {
-		return employeeListModel.getSelectedItem().toString();
+		System.out.println(employeeList.getSelectedValue());
+		return employeeList.getSelectedValue();
 	}
 	
 	public void setSelectedListItem(int index) {
