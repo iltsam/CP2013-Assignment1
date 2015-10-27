@@ -1,0 +1,70 @@
+import java.awt.EventQueue;
+import java.sql.*;
+
+import javax.swing.SwingUtilities;
+
+// Public ip 123.211.106.137
+public class Payroll {
+	private static PayrollGUI gui;
+	private static DatabaseController db = new DatabaseController();
+	private static ResultSet resultSet;
+	public static void main(String[] args) throws Exception{
+		EventQueue.invokeLater(new Runnable() {
+            public void run(){
+                gui = new PayrollGUI();
+                gui.main();
+            }
+        });
+		
+		EventQueue.invokeLater(new Runnable() {
+            public void run(){
+    			test();
+    			setupEmployeeDetails();
+            }
+        });
+		
+		EventQueue.invokeLater(new Runnable() {
+            public void run(){
+            	
+            }
+        });
+	};
+
+	private static void test() {
+		try {
+			resultSet = db.dbQuery("SELECT * FROM Employee");
+			while(resultSet.next()){
+				System.out.println("ID: " + resultSet.getString("id") + "\nName: " + resultSet.getString("first_name"));
+				gui.addEmployeeToList(resultSet.getString("first_name"));
+			}
+			db.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void setupEmployeeDetails(){
+		try {
+			String firstName = gui.getSelectedListItem();
+			resultSet = db.dbQuery("SELECT * FROM Employee WHERE first_name = '" + firstName + "'");
+			while(resultSet.next()) {
+				gui.setID(resultSet.getString(1));
+				gui.setFirstName(resultSet.getString(2));
+			}
+			db.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+
+}

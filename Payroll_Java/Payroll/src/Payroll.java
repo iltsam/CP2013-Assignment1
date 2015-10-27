@@ -18,7 +18,7 @@ public class Payroll {
 		
 		EventQueue.invokeLater(new Runnable() {
             public void run(){
-    			test();
+    			populateList();
     			setupEmployeeDetails();
             }
         });
@@ -30,12 +30,12 @@ public class Payroll {
         });
 	};
 
-	private static void test() {
+	private static void populateList() {
 		try {
-			resultSet = db.dbQuery("SELECT * FROM Employee");
+			resultSet = db.dbQuery("SELECT * FROM `Employee Details`");
 			while(resultSet.next()){
-				System.out.println("ID: " + resultSet.getString("id") + "\nName: " + resultSet.getString("first_name"));
-				gui.addEmployeeToList(resultSet.getString("first_name"));
+				System.out.println("ID: " + resultSet.getString("id") + "\nName: " + resultSet.getString("FirstName"));
+				gui.addEmployeeToList(resultSet.getString("FirstName"));
 			}
 			db.close();
 		} catch (SQLException e) {
@@ -50,10 +50,13 @@ public class Payroll {
 	private static void setupEmployeeDetails(){
 		try {
 			String firstName = gui.getSelectedListItem();
-			resultSet = db.dbQuery("SELECT * FROM Employee WHERE first_name = '" + firstName + "'");
+			resultSet = db.dbQuery("SELECT * FROM `Employee Details` WHERE FirstName = '" + firstName + "'");
 			while(resultSet.next()) {
-				gui.setID(resultSet.getString(1));
-				gui.setFirstName(resultSet.getString(2));
+				gui.setID(resultSet.getString("ID"));
+				gui.setFirstName(resultSet.getString("FirstName"));
+				gui.setLastName(resultSet.getString("LastName"));
+				gui.setAge(resultSet.getInt("Age"));
+				System.out.println(gui.getLastName());
 			}
 			db.close();
 		} catch (SQLException e) {

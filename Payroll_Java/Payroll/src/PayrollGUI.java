@@ -41,7 +41,7 @@ public class PayrollGUI {
 	private static JTextField txtNewsTextField  = new JTextField();
 	private static JTextField employeeFirstNameTextBox  = new JTextField();
 	private static JTextField employeeLastNameTextBox  = new JTextField();
-	private static JTextField dobTextBox  = new JTextField();
+	private static JTextField ageTextBox  = new JTextField();
 	private static JTextField hoursWorkedTextBox = new JTextField();
 	private static JTextField hourlyRateTextBox = new JTextField(); // Need to change vars to this format so they can be edited
 	private static JTextField idTextBox  = new JTextField();
@@ -49,6 +49,7 @@ public class PayrollGUI {
 	private static JComboBox<String> salaryComboBox = new JComboBox();
 	private static JList<String> employeeList;
 	private static MyListModel employeeListModel = new MyListModel(new ArrayList<>());
+	private static JButton updateDetailsBtn = new JButton("Update Details");
 
 	/**
 	 * Launch the application.
@@ -141,9 +142,9 @@ public class PayrollGUI {
 		employeeDetails.add(employeeDetailPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_employeeDetailPanel = new GridBagLayout();
 		gbl_employeeDetailPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_employeeDetailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_employeeDetailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_employeeDetailPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_employeeDetailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_employeeDetailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		employeeDetailPanel.setLayout(gbl_employeeDetailPanel);
 		
 		JLabel lblId = new JLabel("ID");
@@ -224,7 +225,6 @@ public class PayrollGUI {
 		employeeFirstNameTextBox.setColumns(10);
 		
 		employeeLastNameTextBox.setHorizontalAlignment(SwingConstants.CENTER);
-		employeeLastNameTextBox.setText("Employee Last Name");
 		GridBagConstraints gbc_employeeLastNameTextBox = new GridBagConstraints();
 		gbc_employeeLastNameTextBox.weightx = 10.0;
 		gbc_employeeLastNameTextBox.insets = new Insets(0, 0, 5, 5);
@@ -249,8 +249,8 @@ public class PayrollGUI {
 		gbc_dobTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_dobTextBox.gridx = 4;
 		gbc_dobTextBox.gridy = 2;
-		employeeDetailPanel.add(dobTextBox, gbc_dobTextBox);
-		dobTextBox.setColumns(10);
+		employeeDetailPanel.add(ageTextBox, gbc_dobTextBox);
+		ageTextBox.setColumns(10);
 		
 		GridBagConstraints gbc_hoursWorkedTextBox = new GridBagConstraints();
 		gbc_hoursWorkedTextBox.weightx = 0.5;
@@ -272,6 +272,7 @@ public class PayrollGUI {
 		hourlyRateTextBox.setColumns(10);
 		
 		salaryComboBox.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
+		salaryComboBox.setSelectedIndex(0);
 		GridBagConstraints gbc_salaryComboBox = new GridBagConstraints();
 		gbc_salaryComboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_salaryComboBox.weightx = 0.1;
@@ -279,6 +280,13 @@ public class PayrollGUI {
 		gbc_salaryComboBox.gridx = 7;
 		gbc_salaryComboBox.gridy = 2;
 		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
+		
+		
+		GridBagConstraints gbc_updateDetailsBtn = new GridBagConstraints();
+		gbc_updateDetailsBtn.insets = new Insets(0, 0, 5, 0);
+		gbc_updateDetailsBtn.gridx = 7;
+		gbc_updateDetailsBtn.gridy = 4;
+		employeeDetailPanel.add(updateDetailsBtn, gbc_updateDetailsBtn);
 		employeeList.setModel(employeeListModel);
 		
 		JPanel runPayroll = new JPanel();
@@ -334,17 +342,24 @@ public class PayrollGUI {
 	}
 	
 	public void setGender(String newGender) {
-		genderComboBox.setSelectedIndex(1);
+		if (newGender == "male") {
+			genderComboBox.setSelectedIndex(0);
+		} else if (newGender == "female") {
+			genderComboBox.setSelectedIndex(1);
+		} else {
+			System.out.println("Gender can be either 'male' or 'female'");
+		}
 	}
 	
-	public String getDOB(){
+	public String getAge(){
 		String dob;
-		dob = dobTextBox.getText();
+		dob = ageTextBox.getText();
 		return dob;
 	}
 	
-	public void setDOB(String newDOB){
-		dobTextBox.setText(newDOB);
+	public void setAge(int newAge){
+		String age = Integer.toString(newAge);
+		ageTextBox.setText(age);
 	}
 	
 	public String getHoursWorked(){
@@ -357,8 +372,8 @@ public class PayrollGUI {
 		hoursWorkedTextBox.setText(newHoursWorked);
 	}
 	
-	public JTextField getHourlyRate() {
-		return hourlyRateTextBox;
+	public String getHourlyRate() {
+		return hourlyRateTextBox.getText();
 	}
 	
 	public void setHourlyRate(String newHourlyRate) {
@@ -373,9 +388,9 @@ public class PayrollGUI {
 	
 	public void setSalary(Boolean newSalary) {
 		if (newSalary == true) {
-			
+			salaryComboBox.setSelectedIndex(0);
 		}else if (newSalary == false) {
-			
+			salaryComboBox.setSelectedIndex(1);
 		}
 	}
 	
