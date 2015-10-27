@@ -30,12 +30,13 @@ public class Payroll {
         });
 	};
 
-	private static void populateList() {
+	public static void populateList() {
+		gui.dropList();
 		try {
 			resultSet = db.dbQuery("SELECT * FROM `Employee Details`");
 			while(resultSet.next()){
 				System.out.println("ID: " + resultSet.getString("id") + "\nName: " + resultSet.getString("FirstName"));
-				gui.addEmployeeToList(resultSet.getString("FirstName"));
+				gui.addEmployeeToList(resultSet.getString("ID") + "|" + resultSet.getString("FirstName"));
 			}
 			db.close();
 		} catch (SQLException e) {
@@ -47,15 +48,16 @@ public class Payroll {
 		}
 	}
 	
-	private static void setupEmployeeDetails(){
+	public static void setupEmployeeDetails(){
 		try {
-			String firstName = gui.getSelectedListItem();
-			resultSet = db.dbQuery("SELECT * FROM `Employee Details` WHERE FirstName = '" + firstName + "'");
+			int id = Integer.parseInt(gui.getSelectedListItem().split("|")[0]);
+			resultSet = db.dbQuery("SELECT * FROM `Employee Details` WHERE ID = '" + id + "'");
 			while(resultSet.next()) {
 				gui.setID(resultSet.getString("ID"));
 				gui.setFirstName(resultSet.getString("FirstName"));
 				gui.setLastName(resultSet.getString("LastName"));
 				gui.setAge(resultSet.getInt("Age"));
+				gui.setAddress(resultSet.getString("Address1"));
 				System.out.println(gui.getLastName());
 			}
 			db.close();

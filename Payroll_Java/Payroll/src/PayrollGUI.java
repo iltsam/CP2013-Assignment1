@@ -34,6 +34,7 @@ import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import javax.swing.border.TitledBorder;
 
 public class PayrollGUI {
 
@@ -180,7 +181,7 @@ public class PayrollGUI {
 		gbc_genderLbl.gridy = 1;
 		employeeDetailPanel.add(genderLbl, gbc_genderLbl);
 		
-		JLabel dobLbl = new JLabel("D.O.B");
+		JLabel dobLbl = new JLabel("Age");
 		GridBagConstraints gbc_dobLbl = new GridBagConstraints();
 		gbc_dobLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_dobLbl.gridx = 4;
@@ -313,6 +314,31 @@ public class PayrollGUI {
 		employeeDetailPanel.add(updateDetailsBtn, gbc_updateDetailsBtn);
 		employeeList.setModel(employeeListModel);
 		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Add New Employee", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		employeeDetails.add(panel, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{76, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 23, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
+		JLabel lblNewLabel = new JLabel("First Name");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 0;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton.gridx = 23;
+		gbc_btnNewButton.gridy = 1;
+		panel.add(btnNewButton, gbc_btnNewButton);
+		
 		JPanel runPayroll = new JPanel();
 		tabbedPane.addTab("Run Payroll", null, runPayroll, null);
 		runPayroll.setLayout(new BorderLayout(0, 0));
@@ -433,5 +459,16 @@ public class PayrollGUI {
 	public void setSelectedListItem(int index) {
 		employeeListModel.setSelectedItem(index);
 	}
-
+	
+	public void dropList() {
+		employeeListModel.dropList();
+	}
+	
+	public String getAddress() {
+		return addressTextField.getText();
+	}
+	
+	public void setAddress(String newAddress) {
+		addressTextField.setText(newAddress);
+	}
 }

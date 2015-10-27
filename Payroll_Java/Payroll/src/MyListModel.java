@@ -31,5 +31,11 @@ class MyListModel extends AbstractListModel {
   public Object getElementAt(int i) {
     return anArrayList.get(i);
   }
-
+  
+  public void dropList() {
+	  while (anArrayList.size() > 0){
+		  anArrayList.remove(0);
+	  }
+	  
+  }
 }

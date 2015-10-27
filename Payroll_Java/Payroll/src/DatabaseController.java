@@ -13,11 +13,23 @@ public class DatabaseController {
 			  statement = connect.createStatement();
 			  // Result set get the result of the SQL query
 			  resultSet = statement.executeQuery(query);
-			  System.out.println(resultSet);
 		} catch (Exception e) {
 			throw e;
 		}
 		return resultSet;
+	}
+	
+	public void executeQuery(String query) throws SQLException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://123.211.106.137/Payroll?"
+												+ "user=root&password=it@jcu");
+			statement = connect.createStatement();
+			statement.execute(query);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void close() {
