@@ -271,6 +271,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(hourlyRateTextBox, gbc_hourlyRateTextBox);
 		hourlyRateTextBox.setColumns(10);
 		
+		salaryComboBox = new JComboBox();
 		salaryComboBox.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
 		GridBagConstraints gbc_salaryComboBox = new GridBagConstraints();
 		gbc_salaryComboBox.insets = new Insets(0, 0, 5, 0);

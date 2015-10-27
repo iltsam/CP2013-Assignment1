@@ -19,7 +19,6 @@ public class Payroll {
 		EventQueue.invokeLater(new Runnable() {
             public void run(){
     			test();
-    			setupEmployeeDetails();
             }
         });
 		

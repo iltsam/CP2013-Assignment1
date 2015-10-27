@@ -18,8 +18,9 @@ public class Payroll {
 		
 		EventQueue.invokeLater(new Runnable() {
             public void run(){
-    			test();
-    			setupEmployeeDetails();
+            	gui.getHourlyRate().setText("asdas");
+            	gui.setHoursWorked("15");
+            			test();
             }
         });
 		

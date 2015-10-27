@@ -38,16 +38,16 @@ import java.awt.Font;
 public class PayrollGUI {
 
 	private JFrame frmPayroll;
-	private static JTextField txtNewsTextField  = new JTextField();
-	private static JTextField employeeFirstNameTextBox  = new JTextField();
-	private static JTextField employeeLastNameTextBox  = new JTextField();
-	private static JTextField dobTextBox  = new JTextField();
+	private static JTextField txtNewsTextField;
+	private static JTextField employeeFirstNameTextBox;
+	private static JTextField employeeLastNameTextBox;
+	private static JTextField dobTextBox;
 	private static JTextField hoursWorkedTextBox = new JTextField();
 	private static JTextField hourlyRateTextBox = new JTextField(); // Need to change vars to this format so they can be edited
-	private static JTextField idTextBox  = new JTextField();
-	private static JComboBox<String> genderComboBox = new JComboBox();
-	private static JComboBox<String> salaryComboBox = new JComboBox();
-	private static JList<String> employeeList;
+	private static JTextField idTextBox;
+	private static JComboBox<String> genderComboBox;
+	private static JComboBox<String> salaryComboBox;
+	private JList<String> employeeList;
 	private static MyListModel employeeListModel = new MyListModel(new ArrayList<>());
 
 	/**
@@ -204,6 +204,7 @@ public class PayrollGUI {
 		gbc_lblSalary.gridy = 1;
 		employeeDetailPanel.add(lblSalary, gbc_lblSalary);
 		
+		idTextBox = new JTextField();
 		idTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_idTextBox = new GridBagConstraints();
 		gbc_idTextBox.insets = new Insets(0, 0, 5, 5);
@@ -213,6 +214,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(idTextBox, gbc_idTextBox);
 		idTextBox.setColumns(10);
 		
+		employeeFirstNameTextBox = new JTextField();
 		employeeFirstNameTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_employeeFirstNameTextBox = new GridBagConstraints();
 		gbc_employeeFirstNameTextBox.weightx = 10.0;
@@ -223,6 +225,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(employeeFirstNameTextBox, gbc_employeeFirstNameTextBox);
 		employeeFirstNameTextBox.setColumns(10);
 		
+		employeeLastNameTextBox = new JTextField();
 		employeeLastNameTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		employeeLastNameTextBox.setText("Employee Last Name");
 		GridBagConstraints gbc_employeeLastNameTextBox = new GridBagConstraints();
@@ -234,6 +237,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(employeeLastNameTextBox, gbc_employeeLastNameTextBox);
 		employeeLastNameTextBox.setColumns(10);
 		
+		genderComboBox = new JComboBox();
 		genderComboBox.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
 		GridBagConstraints gbc_genderComboBox = new GridBagConstraints();
 		gbc_genderComboBox.weightx = 0.1;
@@ -243,6 +247,7 @@ public class PayrollGUI {
 		gbc_genderComboBox.gridy = 2;
 		employeeDetailPanel.add(genderComboBox, gbc_genderComboBox);
 		
+		dobTextBox = new JTextField();
 		GridBagConstraints gbc_dobTextBox = new GridBagConstraints();
 		gbc_dobTextBox.weightx = 5.0;
 		gbc_dobTextBox.insets = new Insets(0, 0, 5, 5);
@@ -271,6 +276,7 @@ public class PayrollGUI {
 		employeeDetailPanel.add(hourlyRateTextBox, gbc_hourlyRateTextBox);
 		hourlyRateTextBox.setColumns(10);
 		
+		salaryComboBox = new JComboBox();
 		salaryComboBox.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
 		GridBagConstraints gbc_salaryComboBox = new GridBagConstraints();
 		gbc_salaryComboBox.insets = new Insets(0, 0, 5, 0);
