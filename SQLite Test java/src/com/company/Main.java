@@ -43,6 +43,7 @@ public class Main {
                 }
             }
         });
+        frame.setSize(600, 800);
         frame.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -51,9 +52,10 @@ public class Main {
         gbc.insets = new Insets(2, 2, 2, 2);
         frame.getContentPane().add(ta, gbc);
         gbc.gridy++;
+        ta.setEditable(false);
         frame.getContentPane().add(butt, gbc);
 
-        frame.pack();
+//        frame.pack();
         frame.setVisible(true);
     }
 
