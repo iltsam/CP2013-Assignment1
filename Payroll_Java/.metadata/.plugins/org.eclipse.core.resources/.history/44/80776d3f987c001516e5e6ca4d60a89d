@@ -1,0 +1,21 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class changeEmployeeDetailsListener implements ActionListener{
+	private final PayrollGUI mView;
+	public changeEmployeeDetailsListener(PayrollGUI pView) {
+		mView = pView;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (mView.getID() == "1337") {
+			mView.setID("You wish");
+			System.out.println("Setting ID to you wish");
+		} else {
+			System.out.println("Setting id to 1337");
+			mView.setID("1337");
+		}
+		
+		
+	}
+}

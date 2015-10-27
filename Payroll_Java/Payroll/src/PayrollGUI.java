@@ -50,6 +50,7 @@ public class PayrollGUI {
 	private static JList<String> employeeList;
 	private static MyListModel employeeListModel = new MyListModel(new ArrayList<>());
 	private static JButton updateDetailsBtn = new JButton("Update Details");
+	private static JTextField addressTextField = new JTextField();
 
 	/**
 	 * Launch the application.
@@ -134,16 +135,18 @@ public class PayrollGUI {
 		employeeList.setFont(new Font("Lucida Console", Font.PLAIN, 11));
 		employeeListPanel.add(employeeList);
 		
+		ChangeEmployeeDetailsListener l = new ChangeEmployeeDetailsListener(this);
 		JButton loadDetails = new JButton("Load Details");
 		loadDetails.setVerticalAlignment(SwingConstants.BOTTOM);
 		employeeListPanel.add(loadDetails, BorderLayout.SOUTH);
+		loadDetails.addActionListener(l);
 		
 		JPanel employeeDetailPanel = new JPanel();
 		employeeDetails.add(employeeDetailPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_employeeDetailPanel = new GridBagLayout();
 		gbl_employeeDetailPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_employeeDetailPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_employeeDetailPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_employeeDetailPanel.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_employeeDetailPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		employeeDetailPanel.setLayout(gbl_employeeDetailPanel);
 		
@@ -204,6 +207,7 @@ public class PayrollGUI {
 		gbc_lblSalary.gridx = 7;
 		gbc_lblSalary.gridy = 1;
 		employeeDetailPanel.add(lblSalary, gbc_lblSalary);
+		idTextBox.setEditable(false);
 		
 		idTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_idTextBox = new GridBagConstraints();
@@ -281,6 +285,26 @@ public class PayrollGUI {
 		gbc_salaryComboBox.gridy = 2;
 		employeeDetailPanel.add(salaryComboBox, gbc_salaryComboBox);
 		
+		UpdateEmployeeDetailsListener updateEmployeesListener = new UpdateEmployeeDetailsListener(this);
+		if(updateDetailsBtn.getActionListeners().length < 1) {
+			updateDetailsBtn.addActionListener(updateEmployeesListener);
+		}
+		
+		JLabel addressLbl = new JLabel("Address");
+		GridBagConstraints gbc_addressLbl = new GridBagConstraints();
+		gbc_addressLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_addressLbl.gridx = 1;
+		gbc_addressLbl.gridy = 3;
+		employeeDetailPanel.add(addressLbl, gbc_addressLbl);
+		
+		
+		GridBagConstraints gbc_addressTextField = new GridBagConstraints();
+		gbc_addressTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_addressTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_addressTextField.gridx = 1;
+		gbc_addressTextField.gridy = 4;
+		employeeDetailPanel.add(addressTextField, gbc_addressTextField);
+		addressTextField.setColumns(10);
 		
 		GridBagConstraints gbc_updateDetailsBtn = new GridBagConstraints();
 		gbc_updateDetailsBtn.insets = new Insets(0, 0, 5, 0);
@@ -333,6 +357,7 @@ public class PayrollGUI {
 	
 	public void setLastName(String newLastName) {
 		employeeLastNameTextBox.setText(newLastName);
+		System.out.println("Set last name to : " + newLastName);
 	}
 	
 	public String getGender() {
@@ -360,6 +385,7 @@ public class PayrollGUI {
 	public void setAge(int newAge){
 		String age = Integer.toString(newAge);
 		ageTextBox.setText(age);
+		System.out.println("Changed Age to : " + age);
 	}
 	
 	public String getHoursWorked(){
@@ -395,7 +421,6 @@ public class PayrollGUI {
 	}
 	
 	public void addEmployeeToList(String employeeName) {
-		setHourlyRate("123");
 		employeeListModel.add(employeeListModel.getSize(), employeeName);
 		employeeList.setSelectedIndex(0);
 	}

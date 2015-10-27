@@ -1,0 +1,4 @@
+
+public class UpdateEmployeeDetailsListener implements ActionListener {
+	private final PayrollGUI mView;
+}

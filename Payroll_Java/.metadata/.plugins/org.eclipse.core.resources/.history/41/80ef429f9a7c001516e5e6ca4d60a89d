@@ -1,0 +1,25 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ChangeEmployeeDetailsListener implements ActionListener{
+	private final PayrollGUI mView;
+	private final DatabaseController db = new DatabaseController();
+	public ChangeEmployeeDetailsListener(PayrollGUI pView) {
+		mView = pView;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (mView.getSelectedListItem().equals(mView.getFirstName())) {
+			System.out.println("Not changing details because they are the same.");
+		} else {
+			mView.getID();
+			try {
+				db.dbQuery("SELECT * WHERE ");
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+	}
+}

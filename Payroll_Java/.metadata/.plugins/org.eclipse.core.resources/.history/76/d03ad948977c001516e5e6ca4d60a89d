@@ -1,0 +1,7 @@
+
+public class changeEmployeeDetailsListener {
+	private final PayrollGUI mView;
+	public changeEmployeeDetailsListener(PayrollGUI pView) {
+		
+	}
+}
