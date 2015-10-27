@@ -58,7 +58,14 @@ public class Payroll {
 				gui.setLastName(resultSet.getString("LastName"));
 				gui.setAge(resultSet.getInt("Age"));
 				gui.setAddress(resultSet.getString("Address1"));
-				System.out.println(gui.getLastName());
+				gui.setHourlyRate(resultSet.getInt("HourlyRate"));
+				int salary = resultSet.getInt("Salary");
+				if (salary == 1) {
+					gui.setSalary(true);
+				} else if (salary == 0) {
+					gui.setSalary(false);
+				}
+				gui.setGender(resultSet.getString("Gender"));
 			}
 			db.close();
 		} catch (SQLException e) {

@@ -1,0 +1,23 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class AddNewEmployeeListener implements ActionListener {
+	private final PayrollGUI mView;
+	private final DatabaseController db = new DatabaseController();
+	
+	public AddNewEmployeeListener(PayrollGUI pView) {
+		mView = pView;
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("Create listener working");
+		String[] x = mView.getNewEmployee();
+		for (int i = 0; i < x.length; i++) {
+			System.out.println(x[i]);
+		}
+		
+		String query = "INSERT INTO `Employee Details` (FirstName, LastName, Gender, Age, Salary, HourlyRate) VALUES ";
+	}
+
+}

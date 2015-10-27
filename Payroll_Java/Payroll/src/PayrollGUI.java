@@ -52,6 +52,12 @@ public class PayrollGUI {
 	private static MyListModel employeeListModel = new MyListModel(new ArrayList<>());
 	private static JButton updateDetailsBtn = new JButton("Update Details");
 	private static JTextField addressTextField = new JTextField();
+	private JTextField createFirstName;
+	private JTextField createLastName;
+	private JTextField createAge;
+	private JTextField createHourlyRate;
+	private JComboBox createSalary;
+	private JComboBox createGender;
 
 	/**
 	 * Launch the application.
@@ -254,6 +260,7 @@ public class PayrollGUI {
 		gbc_dobTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_dobTextBox.gridx = 4;
 		gbc_dobTextBox.gridy = 2;
+		ageTextBox.setHorizontalAlignment(SwingConstants.CENTER);
 		employeeDetailPanel.add(ageTextBox, gbc_dobTextBox);
 		ageTextBox.setColumns(10);
 		
@@ -263,6 +270,7 @@ public class PayrollGUI {
 		gbc_hoursWorkedTextBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_hoursWorkedTextBox.gridx = 5;
 		gbc_hoursWorkedTextBox.gridy = 2;
+		hoursWorkedTextBox.setEditable(false);
 		employeeDetailPanel.add(hoursWorkedTextBox, gbc_hoursWorkedTextBox);
 		hoursWorkedTextBox.setColumns(10);
 		
@@ -318,26 +326,122 @@ public class PayrollGUI {
 		panel.setBorder(new TitledBorder(null, "Add New Employee", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		employeeDetails.add(panel, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{76, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWidths = new int[]{87, 87, 87, 87, 87, 87, 87, 0};
 		gbl_panel.rowHeights = new int[]{0, 23, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblNewLabel = new JLabel("First Name");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton.gridx = 23;
-		gbc_btnNewButton.gridy = 1;
-		panel.add(btnNewButton, gbc_btnNewButton);
+		JLabel lblNewLabel_1 = new JLabel("Last Name");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 1;
+		gbc_lblNewLabel_1.gridy = 0;
+		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Gender");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 2;
+		gbc_lblNewLabel_2.gridy = 0;
+		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Age");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_3.gridx = 3;
+		gbc_lblNewLabel_3.gridy = 0;
+		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		
+		JLabel lblSalary_1 = new JLabel("Salary");
+		GridBagConstraints gbc_lblSalary_1 = new GridBagConstraints();
+		gbc_lblSalary_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSalary_1.gridx = 4;
+		gbc_lblSalary_1.gridy = 0;
+		panel.add(lblSalary_1, gbc_lblSalary_1);
+		
+		JLabel lblHourlyRate_1 = new JLabel("Hourly Rate");
+		GridBagConstraints gbc_lblHourlyRate_1 = new GridBagConstraints();
+		gbc_lblHourlyRate_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHourlyRate_1.gridx = 5;
+		gbc_lblHourlyRate_1.gridy = 0;
+		panel.add(lblHourlyRate_1, gbc_lblHourlyRate_1);
+		
+		createFirstName = new JTextField();
+		GridBagConstraints gbc_createFirstName = new GridBagConstraints();
+		gbc_createFirstName.insets = new Insets(0, 0, 0, 5);
+		gbc_createFirstName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_createFirstName.gridx = 0;
+		gbc_createFirstName.gridy = 1;
+		panel.add(createFirstName, gbc_createFirstName);
+		createFirstName.setColumns(10);
+		
+		createLastName = new JTextField();
+		createLastName.setText("");
+		GridBagConstraints gbc_createLastName = new GridBagConstraints();
+		gbc_createLastName.insets = new Insets(0, 0, 0, 5);
+		gbc_createLastName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_createLastName.gridx = 1;
+		gbc_createLastName.gridy = 1;
+		panel.add(createLastName, gbc_createLastName);
+		createLastName.setColumns(10);
+		
+		createGender = new JComboBox();
+		createGender.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
+		GridBagConstraints gbc_createGender = new GridBagConstraints();
+		gbc_createGender.insets = new Insets(0, 0, 0, 5);
+		gbc_createGender.fill = GridBagConstraints.HORIZONTAL;
+		gbc_createGender.gridx = 2;
+		gbc_createGender.gridy = 1;
+		panel.add(createGender, gbc_createGender);
+		
+		createAge = new JTextField();
+		GridBagConstraints gbc_createAge = new GridBagConstraints();
+		gbc_createAge.insets = new Insets(0, 0, 0, 5);
+		gbc_createAge.fill = GridBagConstraints.HORIZONTAL;
+		gbc_createAge.gridx = 3;
+		gbc_createAge.gridy = 1;
+		panel.add(createAge, gbc_createAge);
+		createAge.setColumns(10);
+		
+		createSalary = new JComboBox();
+		createSalary.setModel(new DefaultComboBoxModel(new String[] {"Yes", "No"}));
+		GridBagConstraints gbc_createSalary = new GridBagConstraints();
+		gbc_createSalary.insets = new Insets(0, 0, 0, 5);
+		gbc_createSalary.fill = GridBagConstraints.HORIZONTAL;
+		gbc_createSalary.gridx = 4;
+		gbc_createSalary.gridy = 1;
+		panel.add(createSalary, gbc_createSalary);
+		
+		createHourlyRate = new JTextField();
+		GridBagConstraints gbc_createHourlyRate = new GridBagConstraints();
+		gbc_createHourlyRate.fill = GridBagConstraints.HORIZONTAL;
+		gbc_createHourlyRate.insets = new Insets(0, 0, 0, 5);
+		gbc_createHourlyRate.gridx = 5;
+		gbc_createHourlyRate.gridy = 1;
+		panel.add(createHourlyRate, gbc_createHourlyRate);
+		createHourlyRate.setColumns(10);
+		
+		
+		
+		JButton createButton = new JButton("Create");
+		AddNewEmployeeListener addNewEmployeeListener = new AddNewEmployeeListener(this);
+		if(createButton.getActionListeners().length < 1) {
+			createButton.addActionListener(addNewEmployeeListener);
+		}
+		
+		GridBagConstraints gbc_createButton = new GridBagConstraints();
+		gbc_createButton.gridx = 6;
+		gbc_createButton.gridy = 1;
+		panel.add(createButton, gbc_createButton);
 		
 		JPanel runPayroll = new JPanel();
 		tabbedPane.addTab("Run Payroll", null, runPayroll, null);
@@ -393,12 +497,12 @@ public class PayrollGUI {
 	}
 	
 	public void setGender(String newGender) {
-		if (newGender == "male") {
+		if (newGender.equals("Male")) {
 			genderComboBox.setSelectedIndex(0);
-		} else if (newGender == "female") {
+		} else if (newGender.equals("Female")) {
 			genderComboBox.setSelectedIndex(1);
 		} else {
-			System.out.println("Gender can be either 'male' or 'female'");
+			System.out.println("Gender can be either 'Male' or 'Female'");
 		}
 	}
 	
@@ -428,8 +532,8 @@ public class PayrollGUI {
 		return hourlyRateTextBox.getText();
 	}
 	
-	public void setHourlyRate(String newHourlyRate) {
-		hourlyRateTextBox.setText(newHourlyRate);
+	public void setHourlyRate(int newHourlyRate) {
+		hourlyRateTextBox.setText(String.valueOf(newHourlyRate));
 	}
 	
 	public String getSalary() {
@@ -470,5 +574,29 @@ public class PayrollGUI {
 	
 	public void setAddress(String newAddress) {
 		addressTextField.setText(newAddress);
+	}
+	
+	public String[] getNewEmployee() {
+		String salary;
+		if(createSalary.getSelectedIndex() == 0) {
+			salary = "Yes";
+		} else {
+			salary = "No";
+		}
+		String gender;
+		if(createGender.getSelectedIndex() == 0) {
+			gender = "Male";
+		} else {
+			gender = "Female";
+		}
+		String[] newEmployee;
+		newEmployee = new String[6];
+		newEmployee[0] = createFirstName.getText();
+		newEmployee[1] = createLastName.getText();
+		newEmployee[2] = gender;
+		newEmployee[3] = createAge.getText();
+		newEmployee[4] = salary;
+		newEmployee[5] = createHourlyRate.getText();
+		return newEmployee;
 	}
 }
