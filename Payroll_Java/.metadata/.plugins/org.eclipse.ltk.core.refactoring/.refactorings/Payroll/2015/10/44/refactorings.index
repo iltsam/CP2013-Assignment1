@@ -2,3 +2,5 @@
 1445917658833	Rename method 'test'
 1445943506103	Rename compilation unit 'changeEmployeeDetailsListener.java'
 1445957559631	Rename type 'AddNewEmployee'
+1446000216215	Rename local variable 'splitIndex'
+1446004956760	Delete element

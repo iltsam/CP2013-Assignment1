@@ -25,7 +25,7 @@ public class AddNewEmployeeListener implements ActionListener {
 		}
 		// Need to add the last few values to the gui..
 		String query = "INSERT INTO `Employee Details` (FirstName, LastName, Gender, Age, Salary, HourlyRate, MiddleNames, Affiliation, Classification,Address1) "
-					+ "VALUES ('" + newEmployee[0] + "', '" + newEmployee[1] + "', '" + newEmployee[2] + "', '" + age + "', '" + salary + "', '" + hr + "','','','','')";
+					+ "VALUES ('" + newEmployee[0] + "', '" + newEmployee[1] + "', '" + newEmployee[2] + "', '" + age + "', '" + salary + "', '" + hr + "','','','','" + newEmployee[6] + "')";
 		try {
 			db.executeQuery(query);
 		} catch (SQLException e) {

@@ -13,12 +13,21 @@ public class UpdateEmployeeDetailsListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("Update Details button working.");
+		int salary;
+		if(mView.getSalary().equals("Yes")){
+			salary = 1;
+		} else {
+			salary = 0;
+		}
 		String query = "UPDATE `Employee Details` SET "
 						+ "FirstName = '" + mView.getFirstName() + "', "
 						+ "LastName = '" + mView.getLastName() + "', "
 						+ "Age = '" + mView.getAge() + "', "
-						+ "Address1 = '" + mView.getAddress() + "' WHERE ID = '" + mView.getID() + "'";
+						+ "Address1 = '" + mView.getAddress() + "', "
+						+ "Gender = '" + mView.getGender() + "',"
+						+ "HourlyRate = '" + mView.getHourlyRate() + "',"
+						+ "Salary = '" + salary + "',"
+						+ "Affiliation = '" + mView.getAffiliation() + "' WHERE ID = '" + mView.getID() + "'";
 		try {
 			db.executeQuery(query);
 		} catch (SQLException e) {

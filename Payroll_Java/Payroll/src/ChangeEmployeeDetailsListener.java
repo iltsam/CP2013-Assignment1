@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
 public class ChangeEmployeeDetailsListener implements ActionListener{
@@ -21,6 +23,17 @@ public class ChangeEmployeeDetailsListener implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 * employeeList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+			});
+		 */
 
 	}
 }

@@ -1,0 +1,17 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class DeleteEmployeeListener implements ActionListener{
+	private final PayrollGUI mView;
+	private final DatabaseController db = new DatabaseController();
+	private final Payroll payroll = new Payroll();
+	
+	public DeleteEmployeeListener(PayrollGUI pView) {
+		mView = pView;
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		String query = "DELETE FROM `Employee Details` WHERE ID = '" = mView.;
+	}
+
+}

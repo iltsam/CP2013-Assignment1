@@ -1,4 +1,6 @@
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 
 import javax.swing.SwingUtilities;
@@ -20,12 +22,6 @@ public class Payroll {
             public void run(){
     			populateList();
     			setupEmployeeDetails();
-            }
-        });
-		
-		EventQueue.invokeLater(new Runnable() {
-            public void run(){
-            	
             }
         });
 	};
@@ -50,7 +46,12 @@ public class Payroll {
 	
 	public static void setupEmployeeDetails(){
 		try {
-			int id = Integer.parseInt(gui.getSelectedListItem().split("|")[0]);
+			String idString = "";
+			int splitIndex = gui.getSelectedListItem().indexOf("|");
+			if (splitIndex != -1) {
+				idString = gui.getSelectedListItem().substring(0, splitIndex);
+			}
+			int id = Integer.parseInt(idString);
 			resultSet = db.dbQuery("SELECT * FROM `Employee Details` WHERE ID = '" + id + "'");
 			while(resultSet.next()) {
 				gui.setID(resultSet.getString("ID"));
@@ -59,6 +60,7 @@ public class Payroll {
 				gui.setAge(resultSet.getInt("Age"));
 				gui.setAddress(resultSet.getString("Address1"));
 				gui.setHourlyRate(resultSet.getInt("HourlyRate"));
+				gui.setAffiliation(resultSet.getString("Affiliation"));
 				int salary = resultSet.getInt("Salary");
 				if (salary == 1) {
 					gui.setSalary(true);
@@ -76,6 +78,7 @@ public class Payroll {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	
 

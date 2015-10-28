@@ -1,0 +1,37 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+public class UpdateEmployeeDetailsListener implements ActionListener {
+	private final PayrollGUI mView;
+	private final DatabaseController db = new DatabaseController();
+	private final Payroll payroll = new Payroll();
+	
+	public UpdateEmployeeDetailsListener(PayrollGUI pView) {
+		mView = pView;
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		int salary;
+		if(mView.getSalary().equals("Yes")){
+			salary = 1;
+		} else {
+			salary = 0;
+		}
+		String query = "UPDATE `Employee Details` SET "
+						+ "FirstName = '" + mView.getFirstName() + "', "
+						+ "LastName = '" + mView.getLastName() + "', "
+						+ "Age = '" + mView.getAge() + "', "
+						+ "Address1 = '" + mView.getAddress() + "', "
+						+ "Gender = '" + mView.getGender() + "',"
+						+ "HourlyRate = '" + mView.getHourlyRate() + "' WHERE ID = '" + mView.getID() + "'";
+		try {
+			db.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		payroll.populateList();
+	}
+}
