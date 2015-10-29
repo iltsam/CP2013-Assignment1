@@ -65,7 +65,7 @@ class PayrollGui:
 
         self.SearchButton = tkinter.Button(self.mainWindow, text = "Search", bg = "white", width = 25)
         self.DataField = tkinter.Entry(self.mainWindow, bg = "white", width = 60)
-        self.addEmployeeButton = tkinter.Button(self.mainWindow, text = "Add Employee", bg = "white", width = 25)
+        self.addEmployeeButton = tkinter.Button(self.mainWindow, text = "Add Employee", bg = "white", width = 25,command = self.addEmployee)
         self.EditEmployeeButton = tkinter.Button(self.mainWindow, text = "Edit", bg = "white", width = 25)
 
         #List box
@@ -161,6 +161,31 @@ class PayrollGui:
 
         self.addressLabel.grid(column = 1, row = 13)
         self.addressEntry.grid(column = 2, row = 13)
+
+    def addEmployee(self):
+        self.firstNameContent = self.firstNameEntry.get()
+        self.firstNameEntry.delete(0,END)
+        self.middleNameContent = self.middleNameEntry.get()
+        self.middleNameEntry.delete(0,END)
+        self.lastNameContent = self.middleNameEntry.get()
+        self.lastNameEntry.delete(0,END)
+        self.genderContent = self.genderEntry.get()
+        self.genderEntry.delete(0,END)
+        self.dateOfBirthContent = self.dateOfBirthEntry.get()
+        self.dateOfBirthEntry.delete(0,END)
+        self.affiliationContent = self.affiliationEntry.get()
+        self.affiliationEntry.delete(0,END)
+        self.classificationContent = self.affiliationEntry.get()
+        self.classificationEntry.delete(0,END)
+        self.salaryContent = self.salaryEntry.get()
+        self.salaryEntry.delete(0,END)
+        self.hourlyContent = self.hourlyRateEntry.get()
+        self.hourlyRateEntry.delete(0,END)
+        self.addressContent = self.addressEntry.get()
+        self.addressEntry.delete(1,END)
+
+        employeeListItems = (self.firstNameContent, self.middleNameContent, self.lastNameContent, self.genderContent, self.dateOfBirthContent,self.affiliationContent,self.classificationContent,self.salaryContent,self.hourlyContent,self.addressContent)
+        self.employeeList.insert(1,employeeListItems)
 
 
 
