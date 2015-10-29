@@ -1,10 +1,14 @@
 import tkinter
+import mysql.connector
 from tkinter import Listbox
 from tkinter import *
 from tkinter import ttk
 class PayrollGui:
 
     def __init__(self):
+        #database
+        self.database = mysql.connector.connect(host = "123.2111.106.137", user = "root", passwd = "it@jcu")
+        self.cursorObject = self.database.cursor()
 
         #create main window
         self.mainWindow = tkinter.Tk()
@@ -203,11 +207,13 @@ class PayrollGui:
         employeeListItems = (self.firstNameContent, self.middleNameContent, self.lastNameContent, self.genderContent, self.dateOfBirthContent,self.affiliationContent,self.classificationContent,self.salaryContent,self.hourlyContent,self.addressContent)
         self.employeeList.insert(1,employeeListItems)
 
-    def showErrorMessage(self):
-        self.errorMessage = Toplevel()
-        errorMessageLabel = Label(self.errorMessage, text=self.errorText, height=0, width=100)
-        errorMessageLabel.pack()
 
+    def getContent(self):
+        self.newList = []
+        number = 1
+        for content in self.cursorObject.fetchall():
+            self.payrollList.insert(number,content)
+            number = number + 1
 
     def displayRunPayrollWindow(self):
         self.clearWindow()
