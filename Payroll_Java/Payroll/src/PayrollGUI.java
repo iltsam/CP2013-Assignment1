@@ -132,8 +132,10 @@ public class PayrollGUI {
 		newsPanel.add(txtNewsTextField, BorderLayout.CENTER);
 		txtNewsTextField.setColumns(10);
 		
-		List list = new List();
-		overview.add(list);
+		JTextPane txtpnHowToUse = new JTextPane();
+		txtpnHowToUse.setEditable(false);
+		txtpnHowToUse.setText("How To Use.\n1. Select the Employee Details tab up the top\n2. From here you can edit/update/delete and create new employees.");
+		verticalBox.add(txtpnHowToUse);
 		
 		JPanel employeeDetails = new JPanel();
 		tabbedPane.addTab("Employee Details", null, employeeDetails, null);
@@ -505,6 +507,7 @@ public class PayrollGUI {
 		runPayroll.add(runPayrollButton, BorderLayout.SOUTH);
 		
 		JTextArea runPayrollTextArea = new JTextArea();
+		runPayrollTextArea.setEditable(false);
 		runPayrollTextArea.setText("Too be implemented..");
 		runPayroll.add(runPayrollTextArea, BorderLayout.CENTER);
 //		if(salaryComboBox.getModel().getSelectedItem() == "Yes") {
