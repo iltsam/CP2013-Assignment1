@@ -164,35 +164,56 @@ class PayrollGui:
 
     def addEmployee(self):
         self.firstNameContent = self.firstNameEntry.get()
+
         self.firstNameEntry.delete(0,END)
+
         self.middleNameContent = self.middleNameEntry.get()
+
         self.middleNameEntry.delete(0,END)
+
         self.lastNameContent = self.middleNameEntry.get()
+
         self.lastNameEntry.delete(0,END)
         self.genderContent = self.genderEntry.get()
+
         self.genderEntry.delete(0,END)
+
         self.dateOfBirthContent = self.dateOfBirthEntry.get()
+
         self.dateOfBirthEntry.delete(0,END)
         self.affiliationContent = self.affiliationEntry.get()
+
         self.affiliationEntry.delete(0,END)
+
         self.classificationContent = self.affiliationEntry.get()
+
         self.classificationEntry.delete(0,END)
+
         self.salaryContent = self.salaryEntry.get()
+
         self.salaryEntry.delete(0,END)
+
         self.hourlyContent = self.hourlyRateEntry.get()
+
         self.hourlyRateEntry.delete(0,END)
         self.addressContent = self.addressEntry.get()
+
         self.addressEntry.delete(1,END)
 
         employeeListItems = (self.firstNameContent, self.middleNameContent, self.lastNameContent, self.genderContent, self.dateOfBirthContent,self.affiliationContent,self.classificationContent,self.salaryContent,self.hourlyContent,self.addressContent)
         self.employeeList.insert(1,employeeListItems)
 
+    def showErrorMessage(self):
+        self.errorMessage = Toplevel()
+        errorMessageLabel = Label(self.errorMessage, text=self.errorText, height=0, width=100)
+        errorMessageLabel.pack()
 
 
     def displayRunPayrollWindow(self):
         self.clearWindow()
         self.calculatePayButton.grid(column = 1, row = 7)
         self.payrollList.grid(column = 1, row = 6, columnspan = 4)
+
 
     #def editEmployee(self):
 
